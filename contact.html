@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        form{
+            max-width: 200px;
+            max-height: 600px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="name">Name</label>
+        <input type="text"id="name"name="name"required>
+        <br>
+        <label for="e-mail">E-mail</label>
+        <input type="text"id="e-mail"name="e-mail"required>
+        <br>
+        <label for="message">Message</label>
+        <textarea id="message"name="message"required></textarea>
+        <br>
+        <button type="Submit">Submit</button>
+
+
+    </form>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            const name=form.elements['name'].value.trim();
+            if(name == ""){
+                alert("Please enter your name")
+                form.elements['name'].focus();
+                return;
+            }
+            const message=form.elements['message'].value.trim();
+            if(message.length < 20){
+                alert("message must be at least 20 characters long")
+                form.elements['message'].focus();
+                return;
+            }
+            const email=form.elements['e-mail'].value.trim();
+            if(email == ""){
+                alert("Please enter your email")
+                form.elements['e-mail'].focus();
+                return;
+            }
+            alert('Thank you for your message,'+name+'!We will get back to you shortly.');
+            form.reset();
+        });
+    </script>
+    
+</body>
+</html>
